@@ -13,9 +13,7 @@ variable "location" {
     description = "location of your resource group"
 }
 
-variable "network_interface_id" {
-    type = string
-}
+
 
 variable "TenantID" {
     type = string
