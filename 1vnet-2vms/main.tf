@@ -42,3 +42,26 @@ resource "azurerm_subnet" "ServerSubnet2" {
   virtual_network_name = azurerm_virtual_network.VNET1.name
   address_prefixes     = ["10.5.2.0/24"]
 }
+#create NICs for VMs
+resource "azurerm_network_interface" "server1-nic01" {
+  name                = "server1-nic01"
+  location            = var.location
+  resource_group_name = var.resourceGroupName
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.ServerSubnet1.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+resource "azurerm_network_interface" "server2-nic01" {
+  name                = "server2-nic01"
+  location            = var.location
+  resource_group_name = var.resourceGroupName
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.ServerSubnet2.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
