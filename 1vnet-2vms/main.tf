@@ -65,3 +65,61 @@ resource "azurerm_network_interface" "server2-nic01" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+resource "azurerm_windows_virtual_machine" "Server1" {
+  name                  = "Server1"
+  location              = var.location
+  resource_group_name   = var.resourceGroupName
+  network_interface_ids = [azurerm_network_interface.server1-nic01.id]
+  size               = "Standard_DS1_v2"
+  allow_extension_operations = true
+  provision_vm_agent = true
+  admin_username = "azureuser"
+  admin_password = "W3lcomeWorld12!!"
+  
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
+  }
+
+  os_disk {
+    name              = "Server1-disk01"
+    caching           = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  tags = {
+    environment = "DEV"
+  }
+}
+
+
+resource "azurerm_windows_virtual_machine" "Server2" {
+  name                  = "Server2"
+  location              = var.location
+  resource_group_name   = var.resourceGroupName
+  network_interface_ids = [azurerm_network_interface.server2-nic01.id]
+  size               = "Standard_DS1_v2"
+  allow_extension_operations = true
+  provision_vm_agent = true
+  admin_username = "azureuser"
+  admin_password = "W3lcomeWorld12!!"
+  
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2019-Datacenter"
+    version   = "latest"
+  }
+
+  os_disk {
+    name              = "Server2-disk01"
+    caching           = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  tags = {
+    environment = "DEV"
+  }
+}
