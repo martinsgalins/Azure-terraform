@@ -1,20 +1,20 @@
 provider "azurerm" {
-    version = "2.9.0"
-    subscription_id = var.subscriptionID
-    client_id       = var.ApplicationID
-    client_secret   = var.ClientSecret
-    tenant_id       = var.TenantID
-    features {}
+  version         = "2.9.0"
+  subscription_id = var.subscriptionID
+  client_id       = var.ApplicationID
+  client_secret   = var.ClientSecret
+  tenant_id       = var.TenantID
+  features {}
 }
 
 #create resource group
 resource "azurerm_resource_group" "rg" {
-    name     = var.resourceGroupName
-    location = var.location
-    tags      = {
-      Environment = "DEV"
-      createdby = "martins.galins"
-    }
+  name     = var.resourceGroupName
+  location = var.location
+  tags = {
+    Environment = "DEV"
+    createdby   = "martins.galins"
+  }
 }
 #create VNET
 resource "azurerm_virtual_network" "VNET1" {
@@ -26,7 +26,7 @@ resource "azurerm_virtual_network" "VNET1" {
 
   tags = {
     environment = "DEV"
-    createdby = "martins.galins"
+    createdby   = "martins.galins"
   }
 }
 #Add subnets to VNET
@@ -66,16 +66,16 @@ resource "azurerm_network_interface" "server2-nic01" {
   }
 }
 resource "azurerm_windows_virtual_machine" "Server1" {
-  name                  = "Server1"
-  location              = var.location
-  resource_group_name   = var.resourceGroupName
-  network_interface_ids = [azurerm_network_interface.server1-nic01.id]
-  size               = "Standard_DS1_v2"
+  name                       = "Server1"
+  location                   = var.location
+  resource_group_name        = var.resourceGroupName
+  network_interface_ids      = [azurerm_network_interface.server1-nic01.id]
+  size                       = "Standard_DS1_v2"
   allow_extension_operations = true
-  provision_vm_agent = true
-  admin_username = "azureuser"
-  admin_password = "W3lcomeWorld12!!"
-  
+  provision_vm_agent         = true
+  admin_username             = "azureuser"
+  admin_password             = "W3lcomeWorld12!!"
+
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
@@ -84,8 +84,8 @@ resource "azurerm_windows_virtual_machine" "Server1" {
   }
 
   os_disk {
-    name              = "Server1-disk01"
-    caching           = "ReadWrite"
+    name                 = "Server1-disk01"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
 
@@ -96,16 +96,16 @@ resource "azurerm_windows_virtual_machine" "Server1" {
 
 
 resource "azurerm_windows_virtual_machine" "Server2" {
-  name                  = "Server2"
-  location              = var.location
-  resource_group_name   = var.resourceGroupName
-  network_interface_ids = [azurerm_network_interface.server2-nic01.id]
-  size               = "Standard_DS1_v2"
+  name                       = "Server2"
+  location                   = var.location
+  resource_group_name        = var.resourceGroupName
+  network_interface_ids      = [azurerm_network_interface.server2-nic01.id]
+  size                       = "Standard_DS1_v2"
   allow_extension_operations = true
-  provision_vm_agent = true
-  admin_username = "azureuser"
-  admin_password = "W3lcomeWorld12!!"
-  
+  provision_vm_agent         = true
+  admin_username             = "azureuser"
+  admin_password             = "W3lcomeWorld12!!"
+
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
@@ -114,8 +114,8 @@ resource "azurerm_windows_virtual_machine" "Server2" {
   }
 
   os_disk {
-    name              = "Server2-disk01"
-    caching           = "ReadWrite"
+    name                 = "Server2-disk01"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
 
