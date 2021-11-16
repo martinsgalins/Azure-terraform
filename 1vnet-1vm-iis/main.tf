@@ -99,3 +99,16 @@ resource "azurerm_windows_virtual_machine" "Server1" {
 output "Server1_public_ip" {
   value = azurerm_public_ip.pip1.ip_address
 }
+resource "azurerm_virtual_machine_extension" "test" {
+  name                 = "deploy-iis3"
+  virtual_machine_id  = azurerm_windows_virtual_machine.Server1.id
+  publisher            = "Microsoft.Compute"
+  type                 = "CustomScriptExtension"
+  type_handler_version = "1.9"
+
+  settings = <<SETTINGS
+    {
+      "commandToExecute": "powershell.exe -Command \"./install-iis.ps1; exit 0;\""
+    }
+SETTINGS
+}
