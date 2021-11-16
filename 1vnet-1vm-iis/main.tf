@@ -73,7 +73,7 @@ resource "azurerm_windows_virtual_machine" "Server1" {
   location                   = var.location
   resource_group_name        = var.resourceGroupName
   network_interface_ids      = [azurerm_network_interface.server1-nic01.id]
-  size                       = "Standard_DS2_v3"
+  size                       = "Standard_D2_v3"
   allow_extension_operations = true
   provision_vm_agent         = true
   admin_username             = "azureuser"
