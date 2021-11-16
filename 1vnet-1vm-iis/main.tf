@@ -99,8 +99,8 @@ resource "azurerm_windows_virtual_machine" "Server1" {
 output "Server1_public_ip" {
   value = azurerm_public_ip.pip1.ip_address
 }
-resource "azurerm_virtual_machine_extension" "test" {
-  name                 = "deploy-iis3"
+resource "azurerm_virtual_machine_extension" "Install-IIS" {
+  name                 = "Install-IIS"
   virtual_machine_id  = azurerm_windows_virtual_machine.Server1.id
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
