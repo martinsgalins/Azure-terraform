@@ -91,7 +91,7 @@ resource "azurerm_windows_virtual_machine" "Server1" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
-
+  
   tags = {
     environment = "DEV"
   }
@@ -106,9 +106,17 @@ resource "azurerm_virtual_machine_extension" "test" {
   type                 = "CustomScriptExtension"
   type_handler_version = "1.9"
 
-  settings = <<SETTINGS
+    protected_settings = <<PROTECTED_SETTINGS
     {
       "commandToExecute": "powershell.exe -Command \"./install-iis.ps1; exit 0;\""
     }
-SETTINGS
+PROTECTED_SETTINGS
+
+  settings = <<SETTINGS
+    {
+        "fileUris": [
+          "https://raw.githubusercontent.com/martinsgalins/Azure-terraform/main/1vnet-1vm-iis/install-iis.ps1"
+        ]
+    }
+  SETTINGS
 }
