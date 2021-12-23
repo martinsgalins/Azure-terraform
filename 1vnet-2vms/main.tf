@@ -120,6 +120,6 @@ resource "azurerm_windows_virtual_machine" "Server2" {
   }
 
   tags = {
-    environment = "TEST"
+    environment = "DEV"
   }
 }
